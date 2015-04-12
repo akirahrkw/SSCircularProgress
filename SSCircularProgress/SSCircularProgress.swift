@@ -11,23 +11,31 @@ import UIKit
 @IBDesignable
 public class SSCircularProgress: UIView {
 
-    var backgroundRingLayer: CAShapeLayer!
+    private var backgroundRingLayer: CAShapeLayer!
     
-    var ringLayer: CAShapeLayer!
+    private var ringLayer: CAShapeLayer!
     
-    public var progressBackgroundColor: UIColor!
-    
-    public var progressColor: UIColor!
-    
-    @IBInspectable public var lineWidth: CGFloat! {
+    @IBInspectable public var progressBackgroundColor: UIColor! = UIColor(white: 0.5, alpha: 0.3) {
         didSet {
-            updateProperties()
+            self.updateProperties()
         }
     }
     
-    @IBInspectable public var rating: CGFloat! {
+    @IBInspectable public var progressColor: UIColor = UIColor(white: 1.0, alpha: 1.0) {
         didSet {
-            updateProperties()
+            self.updateProperties()
+        }
+    }
+    
+    @IBInspectable public var lineWidth: CGFloat = 10.0 {
+        didSet {
+            self.updateProperties()
+        }
+    }
+    
+    @IBInspectable public var progress: CGFloat = 0.6 {
+        didSet {
+            self.updateProperties()
         }
     }
     
@@ -94,7 +102,7 @@ public class SSCircularProgress: UIView {
     }
     
     public func updateProgress(value: CGFloat) {
-        self.rating = value
+        self.progress = value
     }
     
     private func updateProperties() {
@@ -103,22 +111,19 @@ public class SSCircularProgress: UIView {
             
             var animation = CABasicAnimation(keyPath: "strokeEnd")
             animation.fromValue = self.ringLayer.strokeEnd
-            animation.toValue = self.rating
+            animation.toValue = self.progress
             animation.duration = 0.4
             self.ringLayer.addAnimation(animation, forKey: "strokeEnd")
-            self.ringLayer.strokeEnd = self.rating
+            self.ringLayer.strokeEnd = self.progress
             
-            if self.rating >= 1.0 {
+            if self.progress >= 1.0 {
                 self.hidden = true
             }
         }
     }
     
     private func commonInit() {
-        self.rating = 0.0
-        self.lineWidth = 10.0
         self.backgroundColor = UIColor.clearColor()
-        self.progressBackgroundColor = UIColor(white: 0.5, alpha: 0.3)
-        self.progressColor = UIColor(white: 1.0, alpha: 1.0)
+        self.progress = 0.0
     }
 }

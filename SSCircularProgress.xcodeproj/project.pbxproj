@@ -23,6 +23,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E56879891AD9734B0036CF11 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		E5D681521AD55D2F00F87A53 /* SSCircularProgress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SSCircularProgress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5D681561AD55D2F00F87A53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5D6815D1AD55D3000F87A53 /* SSCircularProgressTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSCircularProgressTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				E5D681561AD55D2F00F87A53 /* Info.plist */,
+				E56879891AD9734B0036CF11 /* README.md */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

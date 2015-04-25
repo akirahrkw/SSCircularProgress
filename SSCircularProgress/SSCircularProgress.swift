@@ -38,12 +38,7 @@ public class SSCircularProgress: UIView {
             self.updateProperties()
         }
     }
-    
-    override init() {
-        super.init()
-        self.commonInit()
-    }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.commonInit()

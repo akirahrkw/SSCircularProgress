@@ -3,6 +3,9 @@
 SSCircularProgress provides circular loading bar, like Instagram loading bar.
 This library is written by Swift, simple and easy to use.
 
+## Swift Version
+this branch supports swift 1.2
+
 ## Interface Builder
 
 As SSCircularProgress inherits UIView and uses @IBDesignable, @IBInspectable, 

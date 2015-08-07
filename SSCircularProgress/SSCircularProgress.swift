@@ -44,7 +44,7 @@ public class SSCircularProgress: UIView {
         self.commonInit()
     }
     
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
     }
@@ -104,7 +104,7 @@ public class SSCircularProgress: UIView {
         
         if self.ringLayer != nil {
             
-            var animation = CABasicAnimation(keyPath: "strokeEnd")
+            let animation = CABasicAnimation(keyPath: "strokeEnd")
             animation.fromValue = self.ringLayer.strokeEnd
             animation.toValue = self.progress
             animation.duration = 0.4

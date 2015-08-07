@@ -17,108 +17,104 @@ public class SSCircularProgress: UIView {
 
     @IBInspectable public var progressBackgroundColor: UIColor! = UIColor(white: 0.5, alpha: 0.3) {
         didSet {
-            self.updateProperties()
+            updateProperties()
         }
     }
 
     @IBInspectable public var progressColor: UIColor = UIColor(white: 1.0, alpha: 1.0) {
         didSet {
-            self.updateProperties()
+            updateProperties()
         }
     }
 
     @IBInspectable public var lineWidth: CGFloat = 10.0 {
         didSet {
-            self.updateProperties()
+            updateProperties()
         }
     }
 
     @IBInspectable public var progress: CGFloat = 0.6 {
         didSet {
-            self.updateProperties()
+            updateProperties()
         }
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.commonInit()
+        commonInit()
     }
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.commonInit()
+        commonInit()
     }
 
     override public func awakeFromNib() {
-        self.commonInit()
+        commonInit()
     }
 
     override public func layoutSubviews() {
         super.layoutSubviews()
 
-        let d = CGFloat(self.lineWidth / 2.0)
+        let d = CGFloat(lineWidth / 2.0)
 
-        if self.backgroundRingLayer == nil {
-            self.backgroundRingLayer = CAShapeLayer()
+        if backgroundRingLayer == nil {
 
-            let rect = CGRectInset(self.bounds, d, d)
+            let rect = CGRectInset(bounds, d, d)
             let path = UIBezierPath(ovalInRect: rect)
-
-            self.backgroundRingLayer.path = path.CGPath
-            self.backgroundRingLayer.fillColor = nil
-            self.backgroundRingLayer.lineWidth = self.lineWidth
-            self.backgroundRingLayer.strokeColor = self.progressBackgroundColor.CGColor
-
-            self.layer.addSublayer(self.backgroundRingLayer)
+            backgroundRingLayer = CAShapeLayer()
+            backgroundRingLayer.path = path.CGPath
+            backgroundRingLayer.fillColor = nil
+            backgroundRingLayer.lineWidth = lineWidth
+            backgroundRingLayer.strokeColor = progressBackgroundColor.CGColor
+            layer.addSublayer(backgroundRingLayer)
         }
 
-        self.backgroundRingLayer.frame = layer.bounds
+        backgroundRingLayer.frame = layer.bounds
 
-        if self.ringLayer == nil {
-            self.ringLayer = CAShapeLayer()
+        if ringLayer == nil {
+            ringLayer = CAShapeLayer()
 
-            let rect = CGRectInset(self.bounds, d, d)
+            let rect = CGRectInset(bounds, d, d)
             let path = UIBezierPath(ovalInRect: rect)
 
-            self.ringLayer.path = path.CGPath
-            self.ringLayer.fillColor = nil
-            self.ringLayer.lineWidth = self.lineWidth
-            self.ringLayer.strokeColor = self.progressColor.CGColor
-            self.ringLayer.strokeEnd = 0.0
-            self.ringLayer.anchorPoint = CGPointMake(0.5, 0.5)
-            self.ringLayer.transform = CATransform3DRotate(ringLayer.transform, CGFloat(-M_PI/2), 0, 0, 1)
-
-            self.layer.addSublayer(self.ringLayer)
+            ringLayer.path = path.CGPath
+            ringLayer.fillColor = nil
+            ringLayer.lineWidth = lineWidth
+            ringLayer.strokeColor = progressColor.CGColor
+            ringLayer.strokeEnd = 0.0
+            ringLayer.anchorPoint = CGPointMake(0.5, 0.5)
+            ringLayer.transform = CATransform3DRotate(ringLayer.transform, CGFloat(-M_PI/2), 0, 0, 1)
+            layer.addSublayer(ringLayer)
         }
 
-        self.ringLayer.frame = layer.bounds
-
-        self.updateProperties()
+        ringLayer.frame = layer.bounds
+        updateProperties()
     }
 
     public func updateProgress(value: CGFloat) {
-        self.progress = value
+        progress = value
     }
 
     private func updateProperties() {
 
-        if self.ringLayer != nil {
+        if ringLayer != nil {
 
             let animation = CABasicAnimation(keyPath: "strokeEnd")
-            animation.fromValue = self.ringLayer.strokeEnd
-            animation.toValue = self.progress
+            animation.fromValue = ringLayer.strokeEnd
+            animation.toValue = progress
             animation.duration = 0.4
-            self.ringLayer.addAnimation(animation, forKey: "strokeEnd")
-            self.ringLayer.strokeEnd = self.progress
+            ringLayer.addAnimation(animation, forKey: "strokeEnd")
+            ringLayer.strokeEnd = progress
 
-            if self.progress >= 1.0 {
-                self.hidden = true
+            if progress >= 1.0 {
+                hidden = true
             }
         }
     }
 
     private func commonInit() {
-        self.backgroundColor = UIColor.clearColor()
-        self.progress = 0.0
+        backgroundColor = UIColor.clearColor()
+        progress = 0.0
     }
 }
